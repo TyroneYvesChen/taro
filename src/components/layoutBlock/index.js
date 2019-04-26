@@ -2,34 +2,22 @@ import Taro, { Component } from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View, Button, Text } from '@tarojs/components'
 import { AtButton, AtTimeline } from 'taro-ui'
-import { add, minus, asyncAdd } from '../../actions/counter'
+import { setBlockLine } from '../../store/actions/app'
 
 import './index.scss'
 
 @connect(
-  ({ counter }) => ({
-    counter
+  ({ app }) => ({
+    app
   }),
   dispatch => ({
-    add() {
-      dispatch(add())
-    },
-    dec() {
-      dispatch(minus())
-    },
-    asyncAdd() {
-      dispatch(asyncAdd())
+    setBlockLine(data) {
+      dispatch(setBlockLine(data))
     }
   })
 )
-class Index extends Component {
-  config = {
-    navigationBarTitleText: '首页'
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
-  }
+class LayoutBlock extends Component {
+  componentWillReceiveProps(nextProps) {}
 
   componentWillUnmount() {}
 
@@ -37,9 +25,27 @@ class Index extends Component {
 
   componentDidHide() {}
 
+  LayoutBlockClick = blockData => {
+    console.log(blockData)
+    this.props.setBlockLine(blockData)
+    Taro.navigateTo({
+      url: '/pages/blockGame/index'
+    })
+  }
+
   render() {
-    return <AtButton type="primary">按钮文案</AtButton>
+    const { blockData } = this.props
+    return (
+      <View
+        className="block"
+        onClick={_ => {
+          this.LayoutBlockClick(blockData)
+        }}
+      >
+        {blockData.label}
+      </View>
+    )
   }
 }
 
-export default Index
+export default LayoutBlock

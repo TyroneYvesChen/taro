@@ -2,23 +2,37 @@ import Taro, { Component } from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View, Button, Text } from '@tarojs/components'
 import { AtButton, AtTimeline } from 'taro-ui'
-import { add, minus, asyncAdd } from '../../actions/counter'
+
+import { getBlockList } from '@utils'
+import LayoutBlock from '@components/LayoutBlock'
 
 import './index.scss'
 
 @connect(
-  ({ counter }) => ({
-    counter
+  ({ app }) => ({
+    app
   }),
   dispatch => ({})
 )
-class LayoutBlock extends Component {
+class Index extends Component {
   config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '反应小测试'
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps)
+  constructor(props) {
+    super(props)
+    this.state = {
+      blockList: []
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {}
+
+  componentDidMount() {
+    const blockList = getBlockList(3, 8)
+    this.setState({
+      blockList
+    })
   }
 
   componentWillUnmount() {}
@@ -28,15 +42,19 @@ class LayoutBlock extends Component {
   componentDidHide() {}
 
   render() {
+    const { blockList } = this.state
     return (
-      <View className="at-row">
-        <View className="at-col at-col-3">A</View>
-        <View className="at-col at-col-6">B</View>
-        <View className="at-col at-col-2">C</View>
-        <View className="at-col at-col-1">D</View>
-      </View>
+      <div>
+        <View className="at-row at-row--wrap ">
+          {blockList.map(v => (
+            <View className="at-col at-col-6 block-wrap">
+              <LayoutBlock blockData={v} />
+            </View>
+          ))}
+        </View>
+      </div>
     )
   }
 }
 
-export default LayoutBlock
+export default Index

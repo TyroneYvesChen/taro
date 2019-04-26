@@ -1,0 +1,20 @@
+.block-game-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 50px;
+  background: #000;
+
+  .block-game-item {
+    width: 20%;
+    padding: 10px;
+    // border: 1px white solid;
+    padding: 15px;
+    box-sizing: border-box;
+
+    .block-game-num {
+      text-align: center;
+      border-radius: 10px;
+      background: red;
+    }
+  }
+}

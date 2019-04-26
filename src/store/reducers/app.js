@@ -1,20 +1,15 @@
-import { ADD, MINUS } from '../../constants/counter'
+import { SET_LINE } from '../../constants/app'
 
 const INITIAL_STATE = {
-  num: 0
+  blockLineObj: {}
 }
 
 export default function counter(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case ADD:
+    case SET_LINE:
       return {
         ...state,
-        num: state.num + 1
-      }
-    case MINUS:
-      return {
-        ...state,
-        num: state.num - 1
+        blockLineObj: action.payload
       }
     default:
       return state
