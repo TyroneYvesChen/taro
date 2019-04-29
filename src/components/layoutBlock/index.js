@@ -26,7 +26,7 @@ class LayoutBlock extends Component {
   componentDidHide() {}
 
   LayoutBlockClick = blockData => {
-    console.log(blockData)
+    console.log(blockData, '点击')
     this.props.setBlockLine(blockData)
     Taro.navigateTo({
       url: '/pages/blockGame/index'
