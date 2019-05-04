@@ -26,22 +26,22 @@ class Index extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {}
+  componentWillReceiveProps (nextProps) { }
 
-  componentDidMount() {
+  componentDidMount () {
     const blockList = getBlockList(3, 8)
     this.setState({
       blockList
     })
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount () { }
 
-  componentDidShow() {}
+  componentDidShow () { }
 
-  componentDidHide() {}
+  componentDidHide () { }
 
-  render() {
+  render () {
     const { blockList } = this.state
     return (
       <div>

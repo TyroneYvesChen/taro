@@ -2,12 +2,14 @@
   padding: 20px;
   background: #000;
 }
+
 .block-game-wrap {
   width: 100%;
   display: block;
   font-size: 0;
   text-align: center;
 }
+
 .block-game-item {
   display: inline-block;
   vertical-align: top;
@@ -16,7 +18,13 @@
   // padding-bottom: 25%;
   position: relative;
   box-sizing: border-box;
+
+  &.checked {
+    opacity:0.5;
+    color:#fff;
+  }
 }
+
 .block-game-text {
   border-radius: 10px;
   display: flex;
@@ -28,7 +36,21 @@
   bottom: 10px;
   background-color: #c43;
 }
+
 .block-game-content {
   font-size: 48px;
   margin: auto;
+}
+
+.block-game-title{
+  color: #fff;
+  padding: 36px 0;
+  text-align: center;
+  position: relative;
+}
+
+.block-game-second{
+  // float: right;
+  position: absolute;
+  right: 20px;
 }

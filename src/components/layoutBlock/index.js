@@ -1,7 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View, Button, Text } from '@tarojs/components'
-import { AtButton, AtTimeline } from 'taro-ui'
 import { setBlockLine } from '../../store/actions/app'
 
 import './index.scss'
@@ -11,19 +10,19 @@ import './index.scss'
     app
   }),
   dispatch => ({
-    setBlockLine(data) {
+    setBlockLine (data) {
       dispatch(setBlockLine(data))
     }
   })
 )
 class LayoutBlock extends Component {
-  componentWillReceiveProps(nextProps) {}
+  componentWillReceiveProps (nextProps) { }
 
-  componentWillUnmount() {}
+  componentWillUnmount () { }
 
-  componentDidShow() {}
+  componentDidShow () { }
 
-  componentDidHide() {}
+  componentDidHide () { }
 
   LayoutBlockClick = blockData => {
     console.log(blockData, '点击')
@@ -33,7 +32,7 @@ class LayoutBlock extends Component {
     })
   }
 
-  render() {
+  render () {
     const { blockData } = this.props
     return (
       <View
