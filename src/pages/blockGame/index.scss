@@ -20,8 +20,8 @@
   box-sizing: border-box;
 
   &.checked {
-    opacity:0.5;
-    color:#fff;
+    opacity: 0.5;
+    color: #fff;
   }
 }
 
@@ -34,7 +34,7 @@
   left: 10px;
   right: 10px;
   bottom: 10px;
-  background-color: #c43;
+  // background-color: #c43;
 }
 
 .block-game-content {
@@ -42,14 +42,14 @@
   margin: auto;
 }
 
-.block-game-title{
+.block-game-title {
   color: #fff;
   padding: 36px 0;
   text-align: center;
   position: relative;
 }
 
-.block-game-second{
+.block-game-second {
   // float: right;
   position: absolute;
   right: 20px;

@@ -10,19 +10,19 @@ import './index.scss'
     app
   }),
   dispatch => ({
-    setBlockLine (data) {
+    setBlockLine(data) {
       dispatch(setBlockLine(data))
     }
   })
 )
 class LayoutBlock extends Component {
-  componentWillReceiveProps (nextProps) { }
+  componentWillReceiveProps(nextProps) {}
 
-  componentWillUnmount () { }
+  componentWillUnmount() {}
 
-  componentDidShow () { }
+  componentDidShow() {}
 
-  componentDidHide () { }
+  componentDidHide() {}
 
   LayoutBlockClick = blockData => {
     console.log(blockData, '点击')
@@ -32,12 +32,13 @@ class LayoutBlock extends Component {
     })
   }
 
-  render () {
+  render() {
     const { blockData } = this.props
     return (
       <View
         className="block"
-        onClick={_ => {
+        style={{ background: blockData && blockData.bgColor }}
+        onTap={_ => {
           this.LayoutBlockClick(blockData)
         }}
       >

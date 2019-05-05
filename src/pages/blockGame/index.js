@@ -11,10 +11,10 @@ import './index.scss'
     app
   }),
   dispatch => ({
-    setTimestampStart (data) {
+    setTimestampStart(data) {
       dispatch(setTimestampStart(data))
     },
-    setTimestampEnd (data) {
+    setTimestampEnd(data) {
       dispatch(setTimestampEnd(data))
     }
   })
@@ -29,7 +29,7 @@ class Index extends Component {
     this.state = {
       blockItemList: [], // 方块列表
       max: 0, // 最大多少
-      currentIndex: 0,// 当前进行到第几步骤的下标
+      currentIndex: 0, // 当前进行到第几步骤的下标
       isGameOver: false, // 游戏是否结束
       second: 0, // 游戏时间显示（秒）
       // timestampStart: 0, // 游戏时间戳
@@ -50,18 +50,16 @@ class Index extends Component {
       }))
       .sort((a, b) => (Math.random() > 0.5 ? -1 : 1))
 
-  getComputedStyle = lineNum => {
+  getComputedStyle = (lineNum, bgColor) => {
     const item = 100 / lineNum - 2 + '%'
     return {
       width: item,
-      paddingBottom: item
+      paddingBottom: item,
+      background: bgColor
     }
   }
 
   initGameTime = _ => {
-    // this.setState({
-    //   timestampStart: new Date()
-    // })
     this.props.setTimestampStart(new Date())
     let timeIntervalId = setInterval(_ => {
       let { second } = this.state
@@ -80,9 +78,11 @@ class Index extends Component {
   blockClick = (val, index) => {
     let { currentIndex, max, blockItemList, timeIntervalId } = this.state
     let { value, isChecked } = val
-    // console.log(currentIndex, index)
     console.log(val, index)
-    if (value !== currentIndex + 1 || isChecked) return
+    if (value !== currentIndex + 1 || isChecked) {
+      Taro.vibrateLong()
+      return
+    }
 
     ++currentIndex
     if (max === currentIndex) {
@@ -92,11 +92,9 @@ class Index extends Component {
       this.setState({
         isGameOver: true,
         timeIntervalId: null
-        // timestampEnd: new Date()
       })
       return
-    }
-    else {
+    } else {
       blockItemList[index].isChecked = true
       this.setState({
         currentIndex: currentIndex,
@@ -106,7 +104,7 @@ class Index extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     console.log(this.props.app)
     const { blockLineObj } = this.props.app
     const { max } = blockLineObj
@@ -115,33 +113,34 @@ class Index extends Component {
     this.initGameTime()
   }
 
-  render () {
+  render() {
     const { blockLineObj } = this.props.app
     const { blockItemList, isGameOver, second } = this.state
-    const { lineNum } = blockLineObj
-    const style = this.getComputedStyle(lineNum)
-    return (
-      isGameOver ? <GameResult data={this.state}></GameResult> :
-        <View className="container">
-          <View className="block-game-title">
-            <Text>以最快速度从1选到{max}</Text>
-            <Text className="block-game-second">{second}秒</Text>
-          </View>
-          <View className="block-game-wrap">
-            {/* <View className="block-game-item" style={{width: `${100 / lineNum}%`}}>222</View> */}
-            {blockItemList.map((val, index) => (
-              <View
-                className={`block-game-item ${val.isChecked ? 'checked' : ''}`}
-                style={style}
-                onClick={_ => this.blockClick(val, index)}
-              >
-                <View className="block-game-text">
-                  <Text className="block-game-content">{val.value}</Text>
-                </View>
-              </View>
-            ))}
-          </View>
+    const { lineNum, bgColor } = blockLineObj
+    const style = this.getComputedStyle(lineNum, bgColor)
+    return isGameOver ? (
+      <GameResult data={this.state} />
+    ) : (
+      <View className="container">
+        <View className="block-game-title">
+          <Text>以最快速度从1选到{max}</Text>
+          <Text className="block-game-second">{second}秒</Text>
         </View>
+        <View className="block-game-wrap">
+          {blockItemList.map((val, index) => (
+            <View
+              className={`block-game-item ${val.isChecked ? 'checked' : ''}`}
+              style={style}
+              onTap={_ => this.blockClick(val, index)}
+              key={index}
+            >
+              <View className="block-game-text">
+                <Text className="block-game-content">{val.value}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      </View>
     )
   }
 }

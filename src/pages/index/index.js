@@ -26,28 +26,28 @@ class Index extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) { }
+  componentWillReceiveProps(nextProps) {}
 
-  componentDidMount () {
-    const blockList = getBlockList(3, 8)
+  componentDidMount() {
+    const blockList = getBlockList(2, 7)
     this.setState({
       blockList
     })
   }
 
-  componentWillUnmount () { }
+  componentWillUnmount() {}
 
-  componentDidShow () { }
+  componentDidShow() {}
 
-  componentDidHide () { }
+  componentDidHide() {}
 
-  render () {
+  render() {
     const { blockList } = this.state
     return (
       <div>
-        <View className="at-row at-row--wrap ">
+        <View className="at-row at-row--wrap main-wrap">
           {blockList.map(v => (
-            <View className="at-col at-col-6 block-wrap">
+            <View className="at-col at-col-6 block-wrap" key={v.lineNum}>
               <LayoutBlock blockData={v} />
             </View>
           ))}
@@ -55,6 +55,10 @@ class Index extends Component {
       </div>
     )
   }
+}
+
+Index.defaultProps = {
+  blockList: []
 }
 
 export default Index
