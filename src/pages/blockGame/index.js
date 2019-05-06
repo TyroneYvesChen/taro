@@ -131,7 +131,7 @@ class Index extends Component {
             <View
               className={`block-game-item ${val.isChecked ? 'checked' : ''}`}
               style={style}
-              onTap={_ => this.blockClick(val, index)}
+              onTouchStart={_ => this.blockClick(val, index)}
               key={index}
             >
               <View className="block-game-text">
