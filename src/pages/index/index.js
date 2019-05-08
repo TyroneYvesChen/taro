@@ -1,8 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View, Button, Text } from '@tarojs/components'
-import { AtButton, AtTimeline } from 'taro-ui'
-
 import { getBlockList } from '@utils'
 import LayoutBlock from '@components/LayoutBlock'
 
