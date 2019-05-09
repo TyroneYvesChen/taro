@@ -63,13 +63,15 @@ class Index extends Component {
 
   render() {
     const { second } = this.state
-    const { isGameOver } = this.props.app
+    const { isGameOver, blockLineObj } = this.props.app
+    const { title } = blockLineObj
+
     return isGameOver ? (
       <GameResult data={this.state} />
     ) : (
       <View className="container">
         <View className="block-game-title">
-          <Text>以最快速度从1选到{max}</Text>
+          <Text>{title}</Text>
           <Text className="block-game-second">{second}秒</Text>
         </View>
         <View>

@@ -19,7 +19,8 @@ export const getBlockList = (startLine, endLine) => {
       lineNum: i,
       min: 1,
       max: i * i,
-      bgColor: colorList[i - startLine] || '#888'
+      bgColor: colorList[i - startLine] || '#888',
+      title: `以最快速度从1选到${i * i}`
     })
   }
 

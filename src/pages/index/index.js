@@ -37,7 +37,8 @@ class Index extends Component {
       {
         type: TYPE_ANIMAL,
         max: 12,
-        label: '生肖大乱斗'
+        label: '生肖大乱斗',
+        title: `以最快速度顺序选择12生肖`
       }
     ]
     const blockList = [...blockAnimalList, ...getBlockList(2, 7)]
