@@ -2,18 +2,13 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Text } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import { connect } from '@tarojs/redux'
-import { setOptions } from '../../store/actions/app'
 import './index.scss'
 
 @connect(
   ({ app }) => ({
     app
   }),
-  dispatch => ({
-    setOptions(data) {
-      dispatch(setOptions(data))
-    }
-  })
+  dispatch => ({})
 )
 class GameResult extends Component {
   constructor(props) {
@@ -31,20 +26,9 @@ class GameResult extends Component {
     return result
   }
 
-  initGameStatus = _ => {
-    this.props.setOptions({
-      blockLineObj: {},
-      timestampStart: 0,
-      timestampEnd: 0,
-      timeIntervalId: null, // 计时
-      isGameOver: false // 游戏是否结束
-    })
-  }
-
   backToHome = e => {
     console.log('wocao')
     e.stopPropagation()
-    this.initGameStatus()
     Taro.reLaunch({
       url: '/pages/index/index'
     })

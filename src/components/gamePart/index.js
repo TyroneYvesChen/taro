@@ -11,6 +11,7 @@ import { TYPE_COMMON, TYPE_ANIMAL } from '@constants/app'
 import { getRandomList } from '@utils'
 // import Xxx from './xxx'
 import GameCommon from './gameCommon'
+import GameAnimal from './gameAnimal'
 import './index.scss'
 
 @connect(
@@ -82,18 +83,6 @@ class GamePart extends Component {
       isChecked: false
     }))
 
-  // 十二生肖的列表
-  getAnimalList = _ => {
-    let arr = getRandomList(12).map(v => ({
-      type: TYPE_ANIMAL,
-      value: v + 1,
-      isChecked: false,
-      img: `${v + 1}.png`
-    }))
-
-    return arr
-  }
-
   getComputedStyle = (lineNum, bgColor) => {
     const item = 100 / lineNum - 2 + '%'
     return {
@@ -103,14 +92,36 @@ class GamePart extends Component {
     }
   }
 
-  componentDidMount() {
+  // 十二生肖的列表
+  getAnimalList = _ =>
+    getRandomList(12).map(v => ({
+      type: TYPE_ANIMAL,
+      value: v + 1,
+      isChecked: false,
+      img: `animal${v + 1}`
+    }))
+
+  initBlockItemList = _ => {
     const { blockLineObj } = this.props.app
     const { max, lineNum, bgColor, type } = blockLineObj
-    const blockItemList = this.getBlockItemList(max)
-    const styleObj = this.getComputedStyle(lineNum, bgColor)
-    console.log(styleObj, '样式啊！！！')
-    this.setState({ blockItemList, max, styleObj, type })
-    // this.getGamesItem()
+
+    const obj = {
+      [TYPE_COMMON]: _ => {
+        const blockItemList = this.getBlockItemList(max)
+        const styleObj = this.getComputedStyle(lineNum, bgColor)
+        this.setState({ blockItemList, max, styleObj, type })
+      },
+      [TYPE_ANIMAL]: _ => {
+        const blockItemList = this.getAnimalList(max)
+        this.setState({ blockItemList, max, type })
+      }
+    }
+
+    obj[type]()
+  }
+
+  componentDidMount() {
+    this.initBlockItemList()
   }
 
   render() {
@@ -118,7 +129,7 @@ class GamePart extends Component {
 
     return (
       <View className="block-game-wrap">
-        {
+        {type === TYPE_COMMON && (
           <GameCommon
             blockItemList={blockItemList}
             styleObj={styleObj}
@@ -126,7 +137,16 @@ class GamePart extends Component {
               this.blockClick.call(this, val, index)
             }}
           />
-        }
+        )}
+        {type === TYPE_ANIMAL && (
+          <GameAnimal
+            blockItemList={blockItemList}
+            styleObj={styleObj}
+            blockClick={(val, index) => {
+              this.blockClick.call(this, val, index)
+            }}
+          />
+        )}
         {/* {blockItemList.map((val, index) => (
           <View
             className={`block-game-item ${val.isChecked ? 'checked' : ''}`}

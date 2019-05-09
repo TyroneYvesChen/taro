@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View, Button, Text } from '@tarojs/components'
 import { setBlockLine } from '../../store/actions/app'
-
+import { TYPE_COMMON, TYPE_ANIMAL } from '@constants/app'
 import './index.scss'
 
 @connect(

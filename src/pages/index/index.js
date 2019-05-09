@@ -2,7 +2,9 @@ import Taro, { Component } from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View, Button, Text } from '@tarojs/components'
 import { getBlockList } from '@utils'
+import { TYPE_COMMON, TYPE_ANIMAL } from '@constants/app'
 import LayoutBlock from '@components/LayoutBlock'
+import { setOptions } from '../../store/actions/app'
 
 import './index.scss'
 
@@ -10,7 +12,11 @@ import './index.scss'
   ({ app }) => ({
     app
   }),
-  dispatch => ({})
+  dispatch => ({
+    setOptions(data) {
+      dispatch(setOptions(data))
+    }
+  })
 )
 class Index extends Component {
   config = {
@@ -27,7 +33,14 @@ class Index extends Component {
   componentWillReceiveProps(nextProps) {}
 
   componentDidMount() {
-    const blockList = getBlockList(2, 7)
+    const blockAnimalList = [
+      {
+        type: TYPE_ANIMAL,
+        max: 12,
+        label: '生肖大乱斗'
+      }
+    ]
+    const blockList = [...blockAnimalList, ...getBlockList(2, 7)]
     this.setState({
       blockList
     })
@@ -35,9 +48,21 @@ class Index extends Component {
 
   componentWillUnmount() {}
 
-  componentDidShow() {}
+  componentDidShow() {
+    this.initGameStatus()
+  }
 
   componentDidHide() {}
+
+  initGameStatus = _ => {
+    this.props.setOptions({
+      blockLineObj: {},
+      timestampStart: 0,
+      timestampEnd: 0,
+      timeIntervalId: null, // 计时
+      isGameOver: false // 游戏是否结束
+    })
+  }
 
   render() {
     const { blockList } = this.state
