@@ -37,7 +37,7 @@ class LayoutBlock extends Component {
     return (
       <View
         className="block"
-        style={{ background: blockData && blockData.bgColor }}
+        // style={{ background: blockData && blockData.bgColor }}
         onTap={_ => {
           this.LayoutBlockClick(blockData)
         }}

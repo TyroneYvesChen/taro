@@ -21,7 +21,7 @@ class App extends Component {
     pages: ['pages/index/index', 'pages/blockGame/index'],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#46435B',
+      navigationBarBackgroundColor: '#000',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'white'
     }

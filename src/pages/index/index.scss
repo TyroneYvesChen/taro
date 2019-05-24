@@ -5,3 +5,12 @@
 .block-wrap {
   padding: 2% 5%;
 }
+
+.main-bg {
+  position: absolute;
+  z-index: -1;
+  width: 120%;
+  height: 165%;
+  right: -10%;
+  top: -33%;
+}

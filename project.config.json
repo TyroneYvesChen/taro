@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist",
   "projectname": "myApp",
   "description": "fuck taro",
-  "appid": "touristappid",
+  "appid": "wx28817e394e55c045",
   "setting": {
     "urlCheck": true,
     "es6": false,

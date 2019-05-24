@@ -8,6 +8,8 @@ import { setOptions } from '../../store/actions/app'
 
 import './index.scss'
 
+import bgImg from '@images/bg.png'
+
 @connect(
   ({ app }) => ({
     app
@@ -69,6 +71,7 @@ class Index extends Component {
     const { blockList } = this.state
     return (
       <div>
+        <Image src={bgImg} className="main-bg" />
         <View className="at-row at-row--wrap main-wrap">
           {blockList.map(v => (
             <View className="at-col at-col-6 block-wrap" key={v.lineNum}>
