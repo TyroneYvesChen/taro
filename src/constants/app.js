@@ -6,5 +6,6 @@ export const SET_GAME_OVER = 'SET_GAME_OVER'
 export const SET_INTERVAL = 'SET_INTERVAL'
 
 // 区分游戏类别
+export const TYPE_WAIT_MORE = 0
 export const TYPE_COMMON = 1
 export const TYPE_ANIMAL = 2

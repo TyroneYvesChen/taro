@@ -10,6 +10,7 @@ const colorList = [
   '#888'
 ]
 
+// 普通模式的数据
 export const getBlockList = (startLine, endLine) => {
   let arr = []
   for (let i = startLine; i <= endLine; i++) {

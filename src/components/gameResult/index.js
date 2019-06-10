@@ -34,6 +34,11 @@ class GameResult extends Component {
     })
   }
 
+  goBack = e => {
+    e.stopPropagation()
+    Taro.navigateBack()
+  }
+
   render() {
     const { timestampStart, timestampEnd, blockLineObj } = this.props.app
     const { label } = blockLineObj
@@ -43,8 +48,14 @@ class GameResult extends Component {
         <View className="result-text">{label}的结果</View>
         <View className="result-content">{gameResultTime}</View>
         <View className="result-text">完成训练</View>
-        <AtButton type="primary" onClick={this.backToHome}>
-          返回主页
+        <View className="result-btn">
+          <AtButton type="primary" onClick={this.backToHome}>
+            返回主页
+          </AtButton>
+        </View>
+
+        <AtButton type="primary" onClick={this.goBack}>
+          返回上一页
         </AtButton>
       </View>
     )

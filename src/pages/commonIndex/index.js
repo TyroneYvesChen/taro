@@ -2,8 +2,8 @@ import Taro, { Component } from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View, Button, Text } from '@tarojs/components'
 import { getBlockList } from '@utils'
-import { TYPE_COMMON, TYPE_ANIMAL, TYPE_WAIT_MORE } from '@constants/app'
-import LayoutBlock from '@components/LayoutBlock/index'
+import { TYPE_COMMON, TYPE_ANIMAL } from '@constants/app'
+import CommonBlock from '@components/commonBlock'
 import { setOptions, setBlockLine } from '../../store/actions/app'
 
 import './index.scss'
@@ -38,25 +38,18 @@ class Index extends Component {
   componentWillReceiveProps(nextProps) {}
 
   componentDidMount() {
-    const blockList = [
-      {
-        type: TYPE_ANIMAL,
-        max: 12,
-        label: '生肖大乱斗',
-        title: `以最快速度顺序选择12生肖`
-      },
-      {
-        type: TYPE_COMMON,
-        label: '数字反应力'
-      },
-      {
-        type: TYPE_WAIT_MORE,
-        label: '敬请期待'
-      }
-    ]
-    console.log(blockList)
+    // const blockAnimalList = [
+    //   {
+    //     type: TYPE_ANIMAL,
+    //     max: 12,
+    //     label: '生肖大乱斗',
+    //     title: `以最快速度顺序选择12生肖`
+    //   }
+    // ]
+    // const blockList = [...blockAnimalList, ...getBlockList(2, 7)]
+
     this.setState({
-      blockList
+      blockList: getBlockList(2, 7)
     })
   }
 
@@ -68,37 +61,15 @@ class Index extends Component {
 
   componentDidHide() {}
 
-  layoutBlockClick = blockData => {
-    console.log(blockData, '点击ininin')
-    const { type, label } = blockData
-    const obj = {
-      [TYPE_WAIT_MORE]: _ => {
-        console.log('TYPE_WAIT_MORE')
-        Taro.showToast({
-          title: label,
-          icon: 'none',
-          mask: true
-        })
-      },
-      [TYPE_COMMON]: _ => {
-        console.log('TYPE_COMMON')
-        Taro.navigateTo({
-          url: '/pages/commonIndex/index'
-        })
-      },
-      [TYPE_ANIMAL]: _ => {
-        console.log('TYPE_ANIMAL')
-        Taro.navigateTo({
-          url: '/pages/blockGame/index'
-        })
-        this.props.setBlockLine(blockData)
-      }
-    }
-    obj[type]()
+  commonBlockClick = blockData => {
+    console.log(blockData, '点击commonBlockClick')
+    this.props.setBlockLine(blockData)
+    Taro.navigateTo({
+      url: '/pages/blockGame/index'
+    })
   }
 
   initGameStatus = _ => {
-    console.log('initGameStatus')
     this.props.setOptions({
       blockLineObj: {},
       timestampStart: 0,
@@ -110,15 +81,13 @@ class Index extends Component {
 
   render() {
     const { blockList } = this.state
-    console.log(blockList, 'blockList')
-
     return (
       <div>
         <Image src={bgImg} className="main-bg" />
         <View className="at-row at-row--wrap main-wrap">
           {blockList.map(v => (
-            <View className="at-col at-col-12 block-wrap" key={v.lineNum}>
-              <LayoutBlock blockData={v} onTap={this.layoutBlockClick} />
+            <View className="at-col at-col-6 block-wrap" key={v.lineNum}>
+              <CommonBlock blockData={v} onTap={this.commonBlockClick} />
             </View>
           ))}
         </View>

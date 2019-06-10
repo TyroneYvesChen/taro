@@ -29,6 +29,8 @@ class LayoutBlock extends Component {
 
   LayoutBlockClick = blockData => {
     console.log(blockData, '点击')
+    console.log(this.props.onInitGameStatus())
+    return
     this.props.setBlockLine(blockData)
     Taro.navigateTo({
       url: '/pages/blockGame/index'
