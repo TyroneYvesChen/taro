@@ -15,10 +15,10 @@ import bgImg from '@images/bg.png'
     app
   }),
   dispatch => ({
-    setOptions(data) {
+    setOptions (data) {
       dispatch(setOptions(data))
     },
-    setBlockLine(data) {
+    setBlockLine (data) {
       dispatch(setBlockLine(data))
     }
   })
@@ -35,9 +35,9 @@ class Index extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {}
+  componentWillReceiveProps (nextProps) { }
 
-  componentDidMount() {
+  componentDidMount () {
     const blockList = [
       {
         type: TYPE_ANIMAL,
@@ -60,13 +60,16 @@ class Index extends Component {
     })
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount () { }
 
-  componentDidShow() {
+  componentDidShow () {
     this.initGameStatus()
+    qq && qq.showShareMenu({
+      showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']
+    })
   }
 
-  componentDidHide() {}
+  componentDidHide () { }
 
   layoutBlockClick = blockData => {
     console.log(blockData, '点击ininin')
@@ -108,7 +111,7 @@ class Index extends Component {
     })
   }
 
-  render() {
+  render () {
     const { blockList } = this.state
     console.log(blockList, 'blockList')
 
